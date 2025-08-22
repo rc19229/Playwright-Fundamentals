@@ -11,7 +11,7 @@ export class LoginPage {
     this.passwordInput = page.getByTestId("password");
     this.loginButton = page.getByTestId("login-submit");
   }
-
+ 
   async goto() {
     await this.page.goto(process.env.URL + "/auth/login");
   }
