@@ -7,7 +7,7 @@
     "test": "npx playwright test",
     "test:chromium": "npx playwright test --project chromium",
     "test:first": "npx playwright test --grep @first",
-    "test:local": "BASE_URL=http://localhost:4200 npx playwright test",
+    "test:local": "BASE_URL=http://localhost:3000 npx playwright test",
     "test:report": "npx playwright test && npx playwright show-report",
     "test:ui": "npx playwright test --ui"
   },
@@ -15,8 +15,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.47.2",
-    "@types/node": "^22.7.4",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.17.2",
     "dotenv": "^16.4.5"
   }
 }

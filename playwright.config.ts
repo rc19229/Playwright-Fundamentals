@@ -1,12 +1,12 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-import dotenv from "dotenv";
-import path from "path";
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -14,42 +14,45 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 export default defineConfig({
   timeout: 30_000,
   globalTimeout: 10 * 60 * 1000,
-  testDir: "./tests",
+  testDir: './test',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI 2 times and locally 1 time */
-  retries: process.env.CI ? 2 : 1,
+  /* Retry on CI one time and locally one time */
+  retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["html"], ["list"]],
+  reporter: [['html'], ['list']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "https://practicesoftwaretesting.com",
-    testIdAttribute: "data-test",
+    baseURL: 'https://practicesoftwaretesting.com',
+
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on",
+    trace: 'on',
     actionTimeout: 0,
     ignoreHTTPSErrors: true,
-    video: "retain-on-failure",
-    screenshot: "only-on-failure",
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
     headless: true,
+
+    testIdAttribute: 'data-test'
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "setup",
-      testMatch: /.*\.setup\.ts/,
+      testMatch: /.*\.setup\.ts/
     },
     {
-      name: "chromium",
-      dependencies: ["setup"],
-      use: { ...devices["Desktop Chrome"], permissions: ["clipboard-read"] },
+      name: 'chromium',
+      // dependencies: ["setup"],
+      use: { ...devices['Desktop Chrome'], permissions: ["clipboard-read"] },
     },
+
     // {
     //   name: 'firefox',
     //   dependencies: ["setup"],
@@ -86,7 +89,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
+  //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
 });
